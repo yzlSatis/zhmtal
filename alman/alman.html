@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <link rel="icon" href="./image.png" type="./image.png" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesli Çeviri</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #topBar {
+            width: 100%;
+            height: 30px;
+            background-color: rgba(255, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #menuToggle {
+            width: 30px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #menuToggle:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        #menuToggle:before {
+            content: "\2261";
+            color: white;
+            font-size: 20px;
+        }
+
+        #menuContent {
+            width: 100px;
+            height: calc(100vh - 30px);
+            background-color: gray;
+            color: white;
+            position: fixed;
+            top: 30px;
+            right: 0;
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        #menuContent.active {
+            display: flex;
+        }
+
+        #menuContent hr {
+            width: 80%;
+            margin: 10px 0;
+            border-color: gray;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 150%;
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: lightgray;
+        }
+
+        #translateMsg {
+            color: rgba(192, 192, 192, 0.8);
+            font-weight: bold;
+            font-size: 10px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .translate {
+            opacity: 1 !important;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 5px;
+            width: 100%;
+            text-align: center;
+            color: gray;
+            font-size: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="topBar">
+        <div id="menuToggle"></div>
+        <!-- Eklenen menü açma düğmesi -->
+        <span style="margin-left: 30px;">Zhmtal Çeviri</span>
+        <!-- Orta hizalama -->
+    </div>
+
+    <!-- Eklenen menü içeriği -->
+    <div id="menuContent">
+        <span style="margin-top: 10px;">Çeviriler</span>
+        <!-- Çeviriler yazısını üste al -->
+        <hr>
+        <div id="germanOption" onclick="goToGerman()">İNGİLİZCE</div>
+        <!-- Almanca seçeneği -->
+    </div>
+
+    <div class="container">
+        <button id="translateBtn" onclick="translateAudio()">🎤</button>
+        <div id="translateMsg">Çevirmen Başladı.</div>
+    </div>
+
+    <audio id="audio" src=""></audio>
+
+    <footer>
+        Almanca / Türkçe
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        window.onload = function() {
+            document.body.style.overflow = "auto";
+            document.getElementById("topBar").style.opacity = "1";
+            document.getElementById("translateBtn").addEventListener("click", function() {
+                document.getElementById("translateMsg").classList.add("translate");
+            });
+
+            // Eklenen menü açma fonksiyonu
+            document.getElementById("menuToggle").addEventListener("click", function() {
+                document.getElementById("menuContent").classList.toggle("active");
+            });
+        };
+
+        // Eklenen Almanca seçeneği yönlendirme fonksiyonu
+        function goToGerman() {
+            window.location.href = "./beta.html";
+        }
+    </script>
+</body>
+
+</html>
